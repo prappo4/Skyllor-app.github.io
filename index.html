@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skyllor - Spin & Earn</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="https://ad.gigapub.tech/script?id=1283"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Animated Background -->
+        <div class="animated-background">
+            <div class="floating-shapes">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+                <div class="shape shape-3"></div>
+                <div class="shape shape-4"></div>
+                <div class="shape shape-5"></div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Home Menu -->
+            <div id="home-menu" class="menu-content active">
+                <div class="dashboard">
+                    <div class="stats-container">
+                        <div class="stat-item">
+                            <div class="stat-value" id="spins-today">0</div>
+                            <div class="stat-label">Spins Today</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="total-spins">0</div>
+                            <div class="stat-label">Total Spins</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="current-balance">0</div>
+                            <div class="stat-label">Sky Balance</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="popup-section">
+                    <div class="popup-message">
+                        Go Fast Rotate Your Spin & Earn Sky Token
+                    </div>
+                    <button class="rotate-spin-btn" onclick="navigateToSpin()">
+                        Rotate Spin
+                    </button>
+                </div>
+
+                <button class="community-btn" onclick="joinCommunity()">
+                    Join Skyllor Community
+                </button>
+
+                <div class="footer-text">
+                    Developed By Skyllor
+                </div>
+            </div>
+
+            <!-- Spin Menu -->
+            <div id="spin-menu" class="menu-content">
+                <div class="spin-stats">
+                    <div class="spin-stat">
+                        <span>Today's Spins: </span>
+                        <span id="spin-today-count">0</span>
+                    </div>
+                    <div class="spin-stat">
+                        <span>Total Spins: </span>
+                        <span id="spin-total-count">0</span>
+                    </div>
+                </div>
+
+                <div class="spin-wheel-container">
+                    <canvas id="spin-wheel" width="300" height="300"></canvas>
+                    <div class="spin-pointer"></div>
+                </div>
+
+                <button id="spin-button" class="spin-btn" onclick="startSpin()">
+                    Rotate Spin
+                </button>
+
+                <div id="cooldown-timer" class="cooldown-timer" style="display: none;">
+                    <div>Next spin available in: <span id="timer-display">00:00</span></div>
+                </div>
+            </div>
+
+            <!-- Payout Menu -->
+            <div id="payout-menu" class="menu-content">
+                <div class="payout-stats">
+                    <div class="payout-stat">
+                        <div class="stat-value" id="payout-balance">0</div>
+                        <div class="stat-label">Current Balance (Sky)</div>
+                    </div>
+                    <div class="payout-stat">
+                        <div class="stat-value" id="total-withdrawn">0</div>
+                        <div class="stat-label">Total Withdrawn</div>
+                    </div>
+                </div>
+
+                <form id="withdrawal-form" class="withdrawal-form">
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" id="withdrawal-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Payout Method</label>
+                        <select id="payout-method" required>
+                            <option value="">Select Method</option>
+                            <option value="Payeer">Payeer</option>
+                            <option value="PayPal">PayPal</option>
+                            <option value="Amazon Gift Card">Amazon Gift Card</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Payout Amount (Min: 150 Sky)</label>
+                        <input type="number" id="payout-amount" min="150" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Payout Address</label>
+                        <input type="text" id="payout-address" required>
+                    </div>
+                    <button type="submit" class="submit-btn">Submit Withdrawal</button>
+                </form>
+
+                <div class="withdrawal-history">
+                    <h3>Withdrawal History</h3>
+                    <div id="history-list" class="history-list">
+                        <!-- History items will be added here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Affiliate Menu -->
+            <div id="affiliate-menu" class="menu-content">
+                <div class="affiliate-stats">
+                    <div class="affiliate-stat">
+                        <div class="stat-value" id="total-referrals">0</div>
+                        <div class="stat-label">Total Referrals</div>
+                    </div>
+                </div>
+
+                <div class="commission-message">
+                    Earn 20% Lifetime Commission per Referral!
+                </div>
+
+                <div class="affiliate-rules">
+                    <h3>Join Affiliate Programme:</h3>
+                    <p>After joining, you can receive 20% lifetime commission from your active friends' earnings and win big rewards! Follow these simple rules to start:</p>
+                    <div class="rules-list">
+                        <div class="rule-item">01. Copy Affiliate Link</div>
+                        <div class="rule-item">02. Share with Friends (Telegram, WhatsApp, Twitter)</div>
+                        <div class="rule-item">03. For Receive commission & Extra Rewards, Please contact our affiliate team.</div>
+                    </div>
+                </div>
+
+                <div class="referral-link-section">
+                    <label>Your Referral Link:</label>
+                    <div class="link-container">
+                        <input type="text" id="referral-link" readonly>
+                        <button onclick="copyReferralLink()" class="copy-btn">Copy</button>
+                    </div>
+                </div>
+
+                <button class="contact-team-btn" onclick="contactTeam()">
+                    Contact Team
+                </button>
+            </div>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <button class="nav-btn active" onclick="showMenu('home')">
+                <div class="nav-icon">🏠</div>
+                <div class="nav-label">Home</div>
+            </button>
+            <button class="nav-btn" onclick="showMenu('spin')">
+                <div class="nav-icon">🎯</div>
+                <div class="nav-label">Spin</div>
+            </button>
+            <button class="nav-btn" onclick="showMenu('payout')">
+                <div class="nav-icon">💰</div>
+                <div class="nav-label">Payout</div>
+            </button>
+            <button class="nav-btn" onclick="showMenu('affiliate')">
+                <div class="nav-icon">👥</div>
+                <div class="nav-label">Affiliate</div>
+            </button>
+        </nav>
+
+        <!-- Popup Modal -->
+        <div id="popup-modal" class="popup-modal">
+            <div class="popup-content">
+                <div class="popup-message" id="popup-message"></div>
+                <button class="popup-close" onclick="closePopup()">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
