@@ -399,7 +399,7 @@ function copyReferralLink() {
 
 // External link functions
 function joinCommunity() {
-    window.open('https://t.me/Skyllorofficial', '_blank');
+    window.open('https://t.me/skyllorofficiall', '_blank');
 }
 
 function contactTeam() {
