@@ -234,7 +234,7 @@ async function startSpin() {
             // Spin completed
             userData.spinsToday++;
             userData.totalSpins++;
-            userData.balance += 10;
+            userData.balance += 25;
             
             // Set cooldown after every 5 spins
             if (userData.spinsToday % 5 === 0 && userData.spinsToday < 15) {
@@ -244,7 +244,7 @@ async function startSpin() {
             saveUserData();
             updateUI();
             
-            showPopup('Congratulations! You earned 10 Sky!');
+            showPopup('Congratulations! You earned 25 Sky!');
             
             isSpinning = false;
             checkSpinAvailability();
@@ -261,7 +261,7 @@ async function startSpin() {
         spinWheel.spin(() => {
             userData.spinsToday++;
             userData.totalSpins++;
-            userData.balance += 10;
+            userData.balance += 25;
             
             if (userData.spinsToday % 5 === 0 && userData.spinsToday < 15) {
                 userData.spinCooldown = new Date(Date.now() + 60 * 60 * 1000).toISOString();
@@ -270,7 +270,7 @@ async function startSpin() {
             saveUserData();
             updateUI();
             
-            showPopup('Congratulations! You earned 10 Sky!');
+            showPopup('Congratulations! You earned 25 Sky!');
             
             isSpinning = false;
             checkSpinAvailability();
@@ -287,8 +287,8 @@ document.getElementById('withdrawal-form').addEventListener('submit', async func
     const amount = parseInt(document.getElementById('payout-amount').value);
     const address = document.getElementById('payout-address').value;
     
-    if (amount < 150) {
-        showPopup('Minimum withdrawal amount is 150 Sky!');
+    if (amount < 375) {
+        showPopup('Minimum withdrawal amount is 375 Sky!');
         return;
     }
     
