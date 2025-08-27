@@ -1,1 +1,27 @@
 npm i react-tads-widget
+import React from "react";
+import { TadsWidget, renderTadsWidget } from 'react-tads-widget';
+
+const PageWithAds: React.FC = () => {
+    const rewardUserByShow = () => {
+        console.log("User rewarded for impression");
+    };
+
+    const onAdsNotFound = () => {
+        console.log("Not found ads for this user");
+    }
+
+    const showFullScreen = () => {
+        renderTadsWidget({ id: 'unique-widget-id', type: 'fullscreen' })
+    }
+
+    return (
+        <div className="container">
+            <button onClick={showFullScreen}>SHOW FULLSCREEN</button>
+
+            <TadsWidget id="unique-widget-id" type="fullscreen" debug={false} onAdsNotFound={onAdsNotFound} onShowReward={rewardUserByShow} />
+        </div>
+    );
+}
+
+export default PageWithAds;
