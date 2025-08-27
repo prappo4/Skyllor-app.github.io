@@ -428,6 +428,15 @@ document.addEventListener('DOMContentLoaded', function() {
         // Handle referral logic here
         console.log('Referred by:', referrerId);
     }
+    import { TadsWidgetProvider } from 'react-tads-widget';
+
+root.render(
+  <React.StrictMode>
+    <TadsWidgetProvider>
+        <App />
+    </TadsWidgetProvider>
+  </React.StrictMode>
+);
 });
 
 // Handle page visibility change to save data
